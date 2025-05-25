@@ -1,2 +1,6 @@
-remote-theme: pages-themes/merlot@v0.2.0
+theme: jekyll-theme-merlot
+permalink: /:title/
+google_analytics: UA-159657824-1
+title: Александр Думаревский
+description: 
 
