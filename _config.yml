@@ -1,10 +1,2 @@
-# Site settings
-title: Liubov Dumarevskaya
-description: GIS | Remote Sensing | Spatial Science
-
-# GitHub Pages theme
-theme: jekyll-theme-merlot
-
-# Optional settings
-markdown: kramdown
+remote-theme: pages-themes/merlot@v0.2.0
 
