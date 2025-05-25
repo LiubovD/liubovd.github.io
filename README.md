@@ -1,4 +1,4 @@
-# 👋 About Me
+# 🐈 About Me
 
 I started with *mosses and mountains* and ended up in *maps and models*.
 
