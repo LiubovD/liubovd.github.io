@@ -7,7 +7,7 @@ description: "Meet my furry companions"
 
 <div class="cat-gallery">
   <div class="cat-card">
-    <img src="/assets/images/my_cat.jpg" alt="My cat Janush">
+    <img src="/assets/my_cat.jpg" alt="My cat Janush">
     <h3>Yanush</h3>
     <p>The adventurous explorer</p>
   </div>
