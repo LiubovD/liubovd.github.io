@@ -1,0 +1,32 @@
+---
+layout: default
+title: "Cat Adventures"
+permalink: /cats/
+---
+
+<div class="cat-page">
+  <h1>Meet My Feline Companion</h1>
+  
+  <div class="cat-photo">
+    <img src="/assets/images/my-cat.jpg" alt="My adorable cat">
+    <p class="caption">This is my beloved cat exploring the world!</p>
+  </div>
+</div>
+
+<style>
+  .cat-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+  }
+  .cat-photo img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin: 1rem 0;
+  }
+  .caption {
+    font-style: italic;
+    color: #666;
+  }
+</style>
