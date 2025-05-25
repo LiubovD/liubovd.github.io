@@ -61,7 +61,7 @@
         });
 
         // Load the GeoJSON file from the same directory
-        fetch('splash_pads.geojson')
+        fetch('splash_pad.geojson')
             .then(response => response.json())
             .then(data => {
                 L.geoJSON(data, {
