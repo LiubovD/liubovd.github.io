@@ -1,67 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Liubov's Maps & Cats</title>
+    <title>Rhode Island Splash Pads | Luba's Maps</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        body {
+        body { 
             font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f5f5f5;
+            margin: 0; 
+            padding: 0; 
         }
-        nav {
-            background: #2A81CB;
-            padding: 1rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        #map { 
+            width: 100%; 
+            height: 100vh; 
         }
-        nav ul {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        .map-header {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            max-width: 300px;
         }
-        nav li {
-            margin-right: 1.5rem;
-        }
-        nav a {
-            color: white;
+        .nav-back {
+            display: inline-block;
+            margin-top: 10px;
+            color: #2A81CB;
             text-decoration: none;
             font-weight: bold;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-        nav a:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        .hero {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
     </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="maps/splash-pads/">Splash Pads Map</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
-    </nav>
-
-    <div class="container">
-        <div class="hero">
-            <h1>Welcome to Maps & Cats</h1>
-            <p>Explore my geospatial projects and feline adventures.</p>
-            <a href="maps/splash-pads/" class="button">View Rhode Island Splash Pads Map</a>
-        </div>
+    <div class="map-header">
+        <h2>Rhode Island Splash Pads</h2>
+        <a href="../../index.html" class="nav-back">← Back to Home</a>
     </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize map centered on Rhode Island
+        const map = L.map('map').setView([41.5801, -71.4774], 9);
+        
+        // Add base map
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Custom water drop icon
+        const waterIcon = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34]
+        });
+
+        // Load the GeoJSON file from the same directory
+        fetch('splash_pads.geojson')
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    pointToLayer: (feature, latlng) => {
+                        return L.marker(latlng, {
+                            icon: waterIcon
+                        }).bindPopup(`
+                            <h3>${feature.properties.name || 'Splash Pad'}</h3>
+                            ${feature.properties.address ? `<p><b>Address:</b> ${feature.properties.address}</p>` : ''}
+                            ${feature.properties.hours ? `<p><b>Hours:</b> ${feature.properties.hours}</p>` : ''}
+                            ${feature.properties.notes ? `<p><b>Notes:</b> ${feature.properties.notes}</p>` : ''}
+                        `);
+                    }
+                }).addTo(map);
+                
+                // Optional: Fit map to show all splash pads
+                map.fitBounds(L.geoJSON(data).getBounds());
+            })
+            .catch(error => {
+                console.error('Error loading GeoJSON:', error);
+                alert('Failed to load splash pad data. Please try again later.');
+            });
+    </script>
 </body>
 </html>
