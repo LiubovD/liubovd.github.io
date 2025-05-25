@@ -10,7 +10,7 @@ description: "My geospatial projects and visualizations"
 <div class="map-gallery">
   <div class="map-card">
     <h3><a href="/maps/splash-pads/">Rhode Island Splash Pads</a></h3>
-    <p>Interactive map of public water features</p>
+    <p>Interactive map of splash pads in Rhode Island</p>
   </div>
   
   <!-- Add more maps as needed -->
