@@ -1,0 +1,120 @@
+import geopandas as gpd
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.colors import Normalize
+import imageio.v2 as imageio
+import os
+import numpy as np
+from PIL import Image
+
+# Configuration
+INPUT_CSV = "overdose_nonf.csv"
+GEOJSON_FILE = "muni.geojson"
+OUTPUT_DIR = "frames"
+GIF_NAME = "overdose_nonf_rates_2016_2023.gif"
+YEAR_RANGE = range(2016, 2023)
+CMAP = "YlOrRd"
+DPI = 150
+FPS = 1.5
+
+
+def main():
+    # Load and prepare data
+    df = pd.read_csv(INPUT_CSV)
+    gdf = gpd.read_file(GEOJSON_FILE)
+
+    # Standardize names to uppercase and strip whitespace
+    df["NAME"] = df["NAME"].str.upper().str.strip()
+    gdf["NAME"] = gdf["NAME"].str.upper().str.strip()
+
+    # Merge data
+    merged = gdf.merge(df, on="NAME", how="left")
+    merged.fillna(0, inplace=True)
+
+    # Set up color normalization
+    max_rate = merged[[str(year) for year in YEAR_RANGE]].max().max()
+    norm = Normalize(vmin=0, vmax=max(5, max_rate))  # Minimum range of 0-5
+
+    # Create output directory
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # Generate frames
+    frames = []
+    base_shape = None
+
+    for year in YEAR_RANGE:
+        fig, ax = plt.subplots(figsize=(12, 10), dpi=DPI)
+
+        # Plot the choropleth map
+        merged.plot(
+            column=str(year),
+            cmap=CMAP,
+            norm=norm,
+            edgecolor="black",
+            linewidth=0.3,
+            ax=ax
+        )
+
+        # Add colorbar
+        sm = plt.cm.ScalarMappable(norm=norm, cmap=CMAP)
+        sm._A = []
+        cbar = fig.colorbar(sm, ax=ax, shrink=0.7)
+        cbar.set_label("Overdose Non-fatal Cases per 100,000", fontsize=10)
+
+        # Add municipality labels (only for larger municipalities)
+        for idx, row in merged.iterrows():
+            if row["geometry"].area > 0.001:  # Only label larger areas
+                ax.annotate(
+                    text=row["NAME"],
+                    xy=row["geometry"].centroid.coords[0],
+                    ha='center',
+                    va='center',
+                    fontsize=7,
+                    fontweight='bold',
+                    color='black',
+                    bbox=dict(boxstyle='round,pad=0.2', fc='white', ec='none', alpha=0.7)
+                )
+
+        ax.set_title(f"RHODE ISLAND OVERDOSE DEATH RATES ({year})",
+                     fontsize=16,
+                     fontweight='bold')
+        ax.axis('off')
+        plt.tight_layout()
+
+        # Save frame
+        frame_path = os.path.join(OUTPUT_DIR, f"frame_{year}.png")
+        plt.savefig(frame_path, bbox_inches='tight', pad_inches=0.1, dpi=DPI)
+        plt.close()
+
+        # Read back the frame for GIF creation
+        try:
+            img = imageio.imread(frame_path)
+            if base_shape is None:
+                base_shape = img.shape
+            elif img.shape != base_shape:
+                img = np.array(Image.fromarray(img).resize(base_shape[1::-1]))
+            frames.append(img)
+        except Exception as e:
+            print(f"Error processing frame {year}: {e}")
+
+    # Create GIF
+    if frames:
+        # Ensure all frames have the same shape
+        frames = [f for f in frames if f.shape == base_shape]
+
+        if frames:
+            imageio.mimsave(
+                GIF_NAME,
+                frames,
+                fps=FPS,
+                loop=0
+            )
+            print(f"Successfully created {GIF_NAME} with {len(frames)} frames")
+        else:
+            print("No valid frames with consistent dimensions found")
+    else:
+        print("No frames were generated")
+
+
+if __name__ == "__main__":
+    main()
