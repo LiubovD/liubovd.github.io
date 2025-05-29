@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Splash Pads in Rhode Island</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Splash Pads in Rhode Island</h2>
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Load your GeoJSON file -->
+<script src="splash_pads.geojson"></script>
+
+<script>
+  // Initialize the map
+  var map = L.map('map').setView([41.7, -71.5], 10); // adjust center & zoom
+
+  // Add OpenStreetMap basemap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Add GeoJSON points
+  L.geoJSON(splash_pads_geojson, {
+    pointToLayer: function (feature, latlng) {
+      return L.circleMarker(latlng, {
+        radius: 6,
+        fillColor: "#0074D9",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+      }).bindPopup(`<strong>${feature.properties.name || "Splash Pad"}</strong>`);
+    }
+  }).addTo(map);
+</script>
+
+</body>
+</html>
