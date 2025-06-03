@@ -113,7 +113,7 @@
         fillOpacity: 0.8
       }
     };
-
+    
     function initMap(containerId, geojsonUrl) {
       const map = L.map(containerId).setView(mapOptions.center, mapOptions.zoom);
       L.tileLayer(mapOptions.tileLayer.url, mapOptions.tileLayer.options).addTo(map);
@@ -121,7 +121,7 @@
       fetch(geojsonUrl)
         .then(res => res.json())
         .then(data => {
-          L.geoJSON(data, {
+          const geoLayer = L.geoJSON(data, {
             onEachFeature: (feature, layer) => {
               const name = feature.properties.name || 'Facility';
               const address = feature.properties.address || '';
@@ -129,7 +129,11 @@
             },
             pointToLayer: (feature, latlng) => L.circleMarker(latlng, mapOptions.geojsonStyle)
           }).addTo(map);
+
+          map.fitBounds(geoLayer.getBounds());
         });
+
+      
     }
 
     // Initialize all four maps
