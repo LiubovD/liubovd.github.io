@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All GeoJSON Maps</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 95vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">All Map Layers</h2>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+
+    // Initialize map
+    const map = L.map('map').setView([41.8240, -71.4128], 12); // Providence coordinates
+
+    // Base layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Function to load GeoJSON layers
+    function addGeoJsonLayer(url, layerName, color) {
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          L.geoJSON(data, {
+            style: { color: color },
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup(layerName);
+            }
+          }).addTo(map);
+        });
+    }
+
+    // Add each GeoJSON file
+    addGeoJsonLayer('splash_pads.geojson', 'Splash Pads', '#d62728');
+    addGeoJsonLayer('outdoor_gyms.geojson', 'Outdoor Gyms', '#2ca02c');
+    addGeoJsonLayer('cooling_centers.geojson', 'Cooling Centers', '#1f77b4');
+    addGeoJsonLayer('warming_centers.geojson', 'Warming Centers', '#ff7f0e');
+  </script>
+</body>
+</html>
