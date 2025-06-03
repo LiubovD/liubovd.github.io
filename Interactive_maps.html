@@ -1,51 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>All GeoJSON Maps</title>
+  <title>All Interactive Maps</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #map {
-      height: 95vh;
-      width: 100%;
+      height: 100vh;
     }
   </style>
 </head>
 <body>
-  <h2 style="text-align:center;">All Map Layers</h2>
   <div id="map"></div>
-
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
+    const map = L.map('map').setView([41.824, -71.412], 12); // Centered on Providence, RI
 
-    // Initialize map
-    const map = L.map('map').setView([41.8240, -71.4128], 12); // Providence coordinates
-
-    // Base layer
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
+      maxZoom: 19
     }).addTo(map);
 
-    // Function to load GeoJSON layers
-    function addGeoJsonLayer(url, layerName, color) {
-      fetch(url)
-        .then(response => response.json())
+    const layers = [
+      { url: 'interactive_maps/cooling_centers.geojson', color: 'blue', name: 'Cooling Centers' },
+      { url: 'interactive_maps/warming_centers.geojson', color: 'red', name: 'Warming Centers' },
+      { url: 'interactive_maps/outdoor_gyms.geojson', color: 'green', name: 'Outdoor Gyms' },
+      { url: 'interactive_maps/splash_pads.geojson', color: 'purple', name: 'Splash Pads' }
+    ];
+
+    layers.forEach(layer => {
+      fetch(layer.url)
+        .then(res => res.json())
         .then(data => {
           L.geoJSON(data, {
-            style: { color: color },
-            onEachFeature: function (feature, layer) {
-              layer.bindPopup(layerName);
+            pointToLayer: (feature, latlng) => {
+              return L.circleMarker(latlng, {
+                radius: 6,
+                fillColor: layer.color,
+                color: '#000',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+              });
+            },
+            onEachFeature: (feature, layerObj) => {
+              layerObj.bindPopup(layer.name + (feature.properties?.name ? ': ' + feature.properties.name : ''));
             }
           }).addTo(map);
         });
-    }
-
-    // Add each GeoJSON file
-    addGeoJsonLayer('splash_pads.geojson', 'Splash Pads', '#d62728');
-    addGeoJsonLayer('outdoor_gyms.geojson', 'Outdoor Gyms', '#2ca02c');
-    addGeoJsonLayer('cooling_centers.geojson', 'Cooling Centers', '#1f77b4');
-    addGeoJsonLayer('warming_centers.geojson', 'Warming Centers', '#ff7f0e');
+    });
   </script>
 </body>
 </html>
