@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Third Level Page</title>
+    <style>
+        /* Add this style for the navigation button */
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #4ca1af, #2c3e50);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Ensure your content doesn't hide behind the button */
+        .header {
+            position: relative;
+            padding-top: 70px; /* Add padding to make room for the button */
+        }
+    </style>
+</head>
+<body>
+    <!-- Add this button at the top of your page -->
+    <a href="../workshops.md" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Back to Workshops
+    </a>
+
+    <div class="header">
+        <h1>Your Third Level Page Title</h1>
+        <p>Page content goes here...</p>
+    </div>
+
+    <!-- Your existing page content here -->
+    
+    <!-- Also add a footer navigation for better usability -->
+    <div style="margin-top: 50px; padding: 20px; text-align: center;">
+        <a href="../workshops.md" style="color: #3498db; text-decoration: none;">
+            <i class="fas fa-arrow-left"></i> Return to Workshops
+        </a>
+    </div>
+
+    <!-- Make sure Font Awesome is included -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</body>
+</html>
