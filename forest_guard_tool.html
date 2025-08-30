@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForestGuard: Dead Tree Detection Tool</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary: #ffa000;
+            --secondary-light: #ffc107;
+            --dark: #263238;
+            --light: #f5f5f5;
+            --gray: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M50 10 L70 40 L60 40 L80 70 L50 70 L30 100 L20 70 L0 70 L20 40 L10 40 Z" fill="white"/></svg>');
+            background-repeat: repeat;
+            opacity: 0.1;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .authorship {
+            font-style: italic;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .workflow {
+            background-color: var(--primary-light);
+            color: white;
+        }
+        
+        .workflow .section-title {
+            color: white;
+        }
+        
+        .workflow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .step {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.5rem;
+            width: 200px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+        
+        .download {
+            text-align: center;
+            background-color: var(--gray);
+        }
+        
+        .download-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .download-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>ForestGuard</h1>
+            <p class="tagline">Advanced Dead Tree Detection for ArcGIS</p>
+            <p>Transforming forest management through AI-powered analysis of aerial imagery</p>
+            <p class="authorship">Developed by Liubov Dumarevskaya with co-authorship by Jason Parent</p>
+        </div>
+    </header>
+
+    <section class="intro">
+        <div class="container">
+            <h2 class="section-title">The Challenge of Forest Health Monitoring</h2>
+            <div class="card">
+                <p>Forest ecosystems worldwide are facing unprecedented threats from climate change, pests, and diseases. Early detection of tree mortality is crucial for effective forest management, but traditional ground surveys are time-consuming, expensive, and often impractical for large areas.</p>
+                <p>Our team of geospatial analysts and forestry experts developed ForestGuard to address this challenge by leveraging the power of ArcGIS and remote sensing technologies to automatically identify dead trees from aerial imagery.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features">
+                <div class="card">
+                    <h3>Automated Detection</h3>
+                    <p>Uses unsupervised classification to identify dead trees without manual intervention, saving countless hours of manual interpretation.</p>
+                </div>
+                <div class="card">
+                    <h3>Spectral Analysis</h3>
+                    <p>Leverages blue band characteristics that typically indicate dead or stressed vegetation for improved accuracy.</p>
+                </div>
+                <div class="card">
+                    <h3>Customizable Parameters</h3>
+                    <p>Adjustable thresholds for different environments, tree species, and imagery types make the tool versatile across various conditions.</p>
+                </div>
+                <div class="card">
+                    <h3>GIS Integration</h3>
+                    <p>Seamlessly integrates with ArcGIS workflows, producing standard vector outputs that can be used directly in spatial analysis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="workflow">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="workflow-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <p>Extract forest areas from aerial imagery</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <p>Perform Iso Cluster unsupervised classification</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <p>Apply Maximum Likelihood classification</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <p>Reclassify to identify dead tree signatures</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <p>Apply spectral filtering using blue band thresholds</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <p>Morphological operations to refine detection</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <p>Convert to vector and filter by size</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <p>Generate final dead tree polygons</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="applications">
+        <div class="container">
+            <h2 class="section-title">Real-World Applications</h2>
+            <div class="card">
+                <p>ForestGuard has been successfully deployed in multiple environments:</p>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li><strong>Wildfire Risk Assessment:</strong> Identifying areas with high concentrations of dead trees that present elevated fire hazards</li>
+                    <li><strong>Forest Health Monitoring:</strong> Tracking the spread of diseases and pests through forest ecosystems</li>
+                    <li><strong>Conservation Planning:</strong> Prioritizing areas for restoration and management interventions</li>
+                    <li><strong>Urban Forestry:</strong> Managing tree health in urban environments to prevent hazards</li>
+                    <li><strong>Climate Change Research:</strong> Studying forest responses to changing environmental conditions</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="download">
+        <div class="container">
+            <h2 class="section-title">Get ForestGuard</h2>
+            <p>Download the complete toolkit including the Python Toolbox, README with instructions, and example data.</p>
+            
+            <div class="download-options">
+                <div class="download-card">
+                    <h3>Basic Version</h3>
+                    <p>Includes the Python Toolbox (.pyt) and comprehensive documentation</p>
+                    <a href="#" class="btn" style="margin-top: 1rem;">Download ZIP</a>
+                </div>
+                
+                <div class="download-card">
+                    <h3>Complete Package</h3>
+                    <p>Includes sample data and tutorial project to get started quickly</p>
+                    <a href="#" class="btn" style="margin-top: 1rem;">Download ZIP</a>
+                </div>
+            </div>
+            
+            <p style="margin-top: 2rem;"><small>System Requirements: ArcGIS Pro with Spatial Analyst extension</small></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>ForestGuard - Dead Tree Detection Tool</p>
+            <p><small>Developed by Liubov Dumarevskaya with co-authorship by Jason Parent</small></p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for download functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadButtons = document.querySelectorAll('.btn');
+            
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your interest in ForestGuard! In a real implementation, this would download the ZIP file.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
