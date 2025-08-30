@@ -21,7 +21,7 @@ description: "Meet my furry companions - past and present"
     <img src="/cats/murka.jpg" alt="Murka in her favorite spot" class="second-image">
     <h3>Murka <span class="angel">😇</span></h3>
     <p>Wild and independent spirit</p>
-    <div class="status-memorial">🌈 2010 - 2022</div>
+    <div class="status-memorial">🌈 1996 - 2018</div>
   </div>
 </div>
 
