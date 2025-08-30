@@ -1,17 +1,23 @@
-# 🐈 About Me
+# 🐈 About Me  
 
-I started with *mosses and mountains* and ended up in *maps and models*.
+![Nice to meet you!](assets/profile.jpg)
 
-As a trained **biologist-turned-GIS scientist**, I use data to understand how the environment affects both **ecosystems** and **communities**. After finishing my PhD on **tree mortality** and **infrastructure resilience**, I’ve turned my attention to **human well-being**.
+I started with *mosses and mountains* and ended up in *maps, models, and machine learning*.  
 
-🌍 These days, I’m combining **demographic** and **public health datasets** to examine **who is most at risk** in the face of environmental change. It's work that connects **ecology to equity**—and it's grounded in **spatial science**.
+As a **biologist-turned-geospatial engineer and software developer**, I’ve moved from field-based ecology to building **GIS- and remote sensing–driven solutions** that uncover how the environment shapes both **ecosystems** and **communities**.  
 
-🛰️ I still love getting outside and getting my boots dirty, but most days you’ll find me:
-- 🧑‍💻 coding geospatial workflows,
-- 🗺️ mapping environmental trends, or
-- 👩‍🏫 helping others make sense of complex spatial problems.
+My PhD research focused on **tree mortality** and **infrastructure resilience**, where I applied **GIS analysis, remote sensing, and predictive modeling** to understand forest change and its impacts. Since then, I’ve expanded my work to connect **environmental science** with **human well-being**.  
+
+🌍 Today, I integrate **geospatial engineering**, **software development**, and **public health data science** to identify **who is most at risk** from environmental change—linking **ecology to equity** through reproducible, scalable workflows.  
+
+🛰️ Most days you’ll find me:  
+- 🧑‍💻 developing automated GIS and remote sensing pipelines,  
+- 🗺️ engineering spatial models to map environmental and demographic patterns, and  
+- 👩‍🏫 helping others build coding and geospatial skills to tackle complex challenges.  
 
 ---
 
-📫 **Let’s connect!**
-Feel free to reach out if you're interested in GIS, remote sensing, environmental justice, or just want to chat about trees, maps, and models.
+📫 **Let’s connect!**  
+- 📧 Email: [luba.dm@gmail.com](mailto:luba.dm@gmail.com)  
+- 🔗 LinkedIn: [Liubov Dumarevskaya, PhD](https://www.linkedin.com/in/liubov-dumarevskaya-phd-26020020/)  
+
