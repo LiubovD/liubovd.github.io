@@ -18,8 +18,7 @@ description: "Meet my furry companions - past and present"
   <!-- Murka - In loving memory -->
   <div class="cat-card memorial">
     <div class="memorial-ribbon">Forever in our hearts</div>
-    <img src="/cats/murka1.jpg" alt="Murka the cat">
-    <img src="/cats/murka2.jpg" alt="Murka in her favorite spot" class="second-image">
+    <img src="/cats/murka.jpg" alt="Murka in her favorite spot" class="second-image">
     <h3>Murka <span class="angel">😇</span></h3>
     <p>Wild and independent spirit</p>
     <div class="status-memorial">🌈 2010 - 2022</div>
