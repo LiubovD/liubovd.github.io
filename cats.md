@@ -9,7 +9,6 @@ description: "Meet my furry companions - past and present"
   <!-- Yanush - The adventurous explorer -->
   <div class="cat-card">
     <img src="/cats/yanush1.jpg" alt="Yanush the cat">
-    <img src="/cats/yanush2.jpg" alt="Yanush playing" class="second-image">
     <h3>Yanush</h3>
     <p>The adventurous explorer</p>
     <div class="status-alive">❤️ Currently brightening our days</div>
