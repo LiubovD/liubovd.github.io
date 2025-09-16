@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Source Census Data Workflow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .presentation-container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #283e51, #485563);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .slides-container {
+            display: flex;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            height: 500px;
+        }
+        
+        .slide {
+            min-width: 100%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .slide-content {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .slide-title {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        
+        .slide-body {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #34495e;
+        }
+        
+        .slide-body ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        
+        .slide-body li {
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            border-radius: 5px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        
+        .tool-feature {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .dot.active {
+            background: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="header">
+            <h1>Open Source Census Data Workflow</h1>
+            <p>From Census API to Interactive Maps with Python</p>
+        </div>
+        
+        <div class="slides-container">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Why Open Source for GIS?</h2>
+                    <div class="slide-body">
+                        <ul>
+                            <li>Accessible: no license costs, community-driven</li>
+                            <li>Flexible: customizable workflows in Python</li>
+                            <li>Transparent: reproducible and sharable code</li>
+                            <li>Scalable: from small projects to big data</li>
+                        </ul>
+                        <p>Our workflow uses <strong>Pandas, GeoPandas, Folium, and the Census API</strong> — all 100% open source.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Workflow Overview</h2>
+                    <div class="slide-body">
+                        <ol>
+                            <li>Fetch demographic data via <strong>Census API</strong></li>
+                            <li>Clean & transform with <strong>Pandas/GeoPandas</strong></li>
+                            <li>Aggregate by tracts or municipalities</li>
+                            <li>Map interactively with <strong>Folium</strong></li>
+                        </ol>
+                        <div class="tool-feature">
+                            <i class="fas fa-code"></i> Entire pipeline is reproducible and runs in Jupyter or Google Colab.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Open Source in Action</h2>
+                    <div class="slide-body">
+                        <p>Example: Fetching Census data with <code>requests</code> and <code>pandas</code>:</p>
+                        <div class="code-block">
+import requests, pandas as pd
+url = "https://api.census.gov/data/2020/acs/acs5"
+params = {"get":"NAME,B01001_001E", "for":"tract:*", "in":"state:44"}
+response = requests.get(url, params=params)
+df = pd.DataFrame(response.json()[1:], columns=response.json()[0])
+                        </div>
+                        <p>From here, the workflow moves to cleaning, aggregating, and mapping.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Interactive Mapping with Folium</h2>
+                    <div class="slide-body">
+                        <p>Folium (Python wrapper for Leaflet.js) lets us build web-ready interactive maps:</p>
+                        <div class="code-block">
+import folium
+m = folium.Map(location=[41.58, -71.47], zoom_start=9)
+folium.Choropleth(
+    geo_data=geojson_data,
+    data=df,
+    columns=["GEOID", "population"],
+    key_on="feature.properties.GEOID",
+    fill_color="YlOrRd",
+    legend_name="Population"
+).add_to(m)
+                        </div>
+                        <p>Maps can be shared online or embedded in web apps — no proprietary software required.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Applications</h2>
+                    <div class="slide-body">
+                        <ul>
+                            <li>Urban planning & equity analysis</li>
+                            <li>Environmental justice mapping</li>
+                            <li>Policy & community advocacy</li>
+                            <li>Education and reproducible research</li>
+                        </ul>
+                        <div class="tool-feature">
+                            <i class="fas fa-users"></i> Open source lowers barriers for students, nonprofits, and local communities.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Next: Live Demo</h2>
+                    <div class="slide-body">
+                        <p>We will now walk through the actual workflow in a Jupyter/Colab environment:</p>
+                        <ul>
+                            <li>Query Census API live</li>
+                            <li>Clean & aggregate data</li>
+                            <li>Build an interactive map</li>
+                            <li>Share results openly</li>
+                        </ul>
+                        <p><strong>All code and materials are open source on GitHub.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prev-btn"><i class="fas fa-arrow-left"></i> Previous</button>
+            <div class="dots" id="slide-dots"></div>
+            <button class="btn" id="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.querySelector('.slides-container');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const dotsContainer = document.getElementById('slide-dots');
+            let currentSlide = 0;
+
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            });
+            const dots = document.querySelectorAll('.dot');
+
+            function goToSlide(slideIndex) {
+                slidesContainer.scrollTo({left: slides[slideIndex].offsetLeft, behavior: 'smooth'});
+                currentSlide = slideIndex;
+                updateDots();
+            }
+
+            function updateDots() {
+                dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+            }
+
+            nextBtn.addEventListener('click', () => { if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1); });
+            prevBtn.addEventListener('click', () => { if (currentSlide > 0) goToSlide(currentSlide - 1); });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
+                if (e.key === 'ArrowLeft' && currentSlide > 0) goToSlide(currentSlide - 1);
+            });
+        });
+    </script>
+</body>
+</html>
