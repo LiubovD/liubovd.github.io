@@ -43,6 +43,220 @@
     </style>
 </head>
 <body>
+         <div class="slides-container">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Introduction to the Tool</h2>
+                    <div class="slide-body">
+                        <p>This presentation showcases a powerful data analysis tool built in Google Colab that:</p>
+                        <ul>
+                            <li>Fetches data directly from the US Census Bureau API</li>
+                            <li>Processes and transforms the data using Pandas</li>
+                            <li>Creates interactive visualizations with Folium</li>
+                            <li>Generates both tract-level and municipality-level insights</li>
+                        </ul>
+                        <div class="colab-badge">
+                            <i class="fab fa-google"></i> Google Colab Environment
+                        </div>
+                        <p>The tool is designed for researchers, data analysts, and anyone interested in exploring demographic data.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Slide: What is Google Colab? -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">What is Google Colab?</h2>
+                    <div class="slide-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fab fa-google"></i>
+                                <h3>Cloud-Based</h3>
+                                <p>Colab runs entirely in the cloud — no installation required.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-laptop"></i>
+                                <h3>Accessible Anywhere</h3>
+                                <p>Use it on laptops, tablets, or even mobile devices.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-users"></i>
+                                <h3>Collaborative</h3>
+                                <p>Share notebooks for teamwork and reproducibility.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-server"></i>
+                                <h3>Instant Resources</h3>
+                                <p>Provides Python + Jupyter with built-in compute power.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide: Cloud with Colab -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Running Workflows in the Cloud with Colab</h2>
+                    <div class="slide-body">
+                        <p>Google Colab provides a fully cloud-based environment:</p>
+                        <ul>
+                            <li>No installation required – runs entirely in the browser</li>
+                            <li>Scales to any device: laptop, tablet, or even phone</li>
+                            <li>Enables collaboration and reproducibility with shareable notebooks</li>
+                            <li>Secure access to Census API and open datasets</li>
+                            <li>Computing resources (Python + Jupyter) instantly available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Slide: API and Requests -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">What is an API & Requests Library?</h2>
+                    <div class="slide-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-plug"></i>
+                                <h3>API</h3>
+                                <p>Application Programming Interface allows programs to communicate with data services like the Census Bureau.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-exchange-alt"></i>
+                                <h3>Data Access</h3>
+                                <p>APIs enable structured and automated access to datasets.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-terminal"></i>
+                                <h3>Requests</h3>
+                                <p>A Python library to send HTTP requests and fetch API data easily.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-code"></i>
+                                <h3>Integration</h3>
+                                <p>Requests integrates smoothly with Pandas for processing results.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Slide: Pandas & GeoPandas -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">What is Pandas & GeoPandas?</h2>
+                    <div class="slide-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-table"></i>
+                                <h3>Pandas</h3>
+                                <p>Python library for powerful tabular data analysis and manipulation.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-chart-bar"></i>
+                                <h3>Data Cleaning</h3>
+                                <p>Helps merge, filter, and calculate new variables with ease.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-globe"></i>
+                                <h3>GeoPandas</h3>
+                                <p>Extends Pandas to handle geographic (spatial) data formats.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-draw-polygon"></i>
+                                <h3>Spatial Analysis</h3>
+                                <p>Enables operations like overlays, buffers, and shapefile joins.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Slide: Folium -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">What is Folium?</h2>
+                    <div class="slide-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h3>Mapping</h3>
+                                <p>A Python library to build interactive maps using Leaflet.js.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-paint-brush"></i>
+                                <h3>Choropleths</h3>
+                                <p>Visualize data patterns with colored geographic regions.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <h3>Interactivity</h3>
+                                <p>Supports zoom, tooltips, and popups for rich user exploration.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-layer-group"></i>
+                                <h3>Layer Control</h3>
+                                <p>Combine multiple map layers to compare datasets easily.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide: Open Source Tools -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">The Power of Open Source Tools</h2>
+                    <div class="slide-body">
+                        <p>This workflow is built entirely on open-source technologies:</p>
+                        <ul>
+                            <li><strong>Python</strong>: foundation of the workflow</li>
+                            <li><strong>Pandas</strong>: robust data processing</li>
+                            <li><strong>Folium</strong>: interactive mapping</li>
+                            <li><strong>Requests</strong>: API communication</li>
+                            <li><strong>GeoPandas/Shapely</strong>: optional advanced spatial operations</li>
+                        </ul>
+                        <p>Open source ensures transparency, flexibility, and community-driven improvements while lowering barriers to entry.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Key Features -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">Key Features</h2>
+                    <div class="slide-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-download"></i>
+                                <h3>Data Fetching</h3>
+                                <p>Retrieves data directly from the Census API with user-selected variables and years</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-table"></i>
+                                <h3>Data Processing</h3>
+                                <p>Uses Pandas to clean, merge, and calculate derived metrics like per-capita values</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h3>Interactive Mapping</h3>
+                                <p>Creates choropleth maps with Folium for visual data exploration</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-layer-group"></i>
+                                <h3>Multiple Geographic Levels</h3>
+                                <p>Analyzes data at both census tract and municipality levels</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+    
     <div class="presentation-container">
         <a href="https://liubovd.github.io/workshops/" class="workshop-link">
             <i class="fas fa-chalkboard-teacher"></i> View Workshops
