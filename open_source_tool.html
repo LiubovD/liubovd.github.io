@@ -43,7 +43,17 @@
     </style>
 </head>
 <body>
-         <div class="slides-container">
+    <div class="presentation-container">
+        <a href="https://liubovd.github.io/workshops/" class="workshop-link">
+            <i class="fas fa-chalkboard-teacher"></i> View Workshops
+        </a>
+
+        <div class="header">
+            <h1>Census Data Analysis Tool</h1>
+            <p>Using open-source tools for data fetching, processing, and visualization</p>
+        </div>
+
+        <div class="slides-container">
             <!-- Slide 1 -->
             <div class="slide">
                 <div class="slide-content">
@@ -64,7 +74,7 @@
                 </div>
             </div>
 
-            <!-- New Slide: What is Google Colab? -->
+            <!-- Slide: What is Google Colab -->
             <div class="slide">
                 <div class="slide-content">
                     <h2 class="slide-title">What is Google Colab?</h2>
@@ -73,29 +83,19 @@
                             <div class="feature-card">
                                 <i class="fab fa-google"></i>
                                 <h3>Cloud-Based</h3>
-                                <p>Colab runs entirely in the cloud — no installation required.</p>
+                                <p>Colab is a free Jupyter Notebook environment hosted by Google in the cloud.</p>
                             </div>
                             <div class="feature-card">
-                                <i class="fas fa-laptop"></i>
+                                <i class="fas fa-cloud"></i>
                                 <h3>Accessible Anywhere</h3>
-                                <p>Use it on laptops, tablets, or even mobile devices.</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-users"></i>
-                                <h3>Collaborative</h3>
-                                <p>Share notebooks for teamwork and reproducibility.</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-server"></i>
-                                <h3>Instant Resources</h3>
-                                <p>Provides Python + Jupyter with built-in compute power.</p>
+                                <p>No installation required — runs directly in your browser on any device.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide: Cloud with Colab -->
+            <!-- Slide: Running Workflows in the Cloud -->
             <div class="slide">
                 <div class="slide-content">
                     <h2 class="slide-title">Running Workflows in the Cloud with Colab</h2>
@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            <!-- New Slide: API and Requests -->
+            <!-- Slide: What is API & Requests -->
             <div class="slide">
                 <div class="slide-content">
                     <h2 class="slide-title">What is an API & Requests Library?</h2>
@@ -121,29 +121,19 @@
                             <div class="feature-card">
                                 <i class="fas fa-plug"></i>
                                 <h3>API</h3>
-                                <p>Application Programming Interface allows programs to communicate with data services like the Census Bureau.</p>
+                                <p>An Application Programming Interface allows programs to communicate with data services like the U.S. Census Bureau.</p>
                             </div>
                             <div class="feature-card">
-                                <i class="fas fa-exchange-alt"></i>
-                                <h3>Data Access</h3>
-                                <p>APIs enable structured and automated access to datasets.</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-terminal"></i>
+                                <i class="fas fa-network-wired"></i>
                                 <h3>Requests</h3>
-                                <p>A Python library to send HTTP requests and fetch API data easily.</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-code"></i>
-                                <h3>Integration</h3>
-                                <p>Requests integrates smoothly with Pandas for processing results.</p>
+                                <p>The Python Requests library makes it easy to send queries and receive responses from APIs.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- New Slide: Pandas & GeoPandas -->
+            <!-- Slide: Pandas & GeoPandas -->
             <div class="slide">
                 <div class="slide-content">
                     <h2 class="slide-title">What is Pandas & GeoPandas?</h2>
@@ -152,29 +142,19 @@
                             <div class="feature-card">
                                 <i class="fas fa-table"></i>
                                 <h3>Pandas</h3>
-                                <p>Python library for powerful tabular data analysis and manipulation.</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-chart-bar"></i>
-                                <h3>Data Cleaning</h3>
-                                <p>Helps merge, filter, and calculate new variables with ease.</p>
+                                <p>A Python library for data manipulation and analysis — powerful for tabular data like Census datasets.</p>
                             </div>
                             <div class="feature-card">
                                 <i class="fas fa-globe"></i>
                                 <h3>GeoPandas</h3>
-                                <p>Extends Pandas to handle geographic (spatial) data formats.</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-draw-polygon"></i>
-                                <h3>Spatial Analysis</h3>
-                                <p>Enables operations like overlays, buffers, and shapefile joins.</p>
+                                <p>Extends Pandas to support spatial data, enabling geographic operations like merging with shapefiles.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- New Slide: Folium -->
+            <!-- Slide: Folium -->
             <div class="slide">
                 <div class="slide-content">
                     <h2 class="slide-title">What is Folium?</h2>
@@ -182,23 +162,13 @@
                         <div class="feature-grid">
                             <div class="feature-card">
                                 <i class="fas fa-map-marked-alt"></i>
-                                <h3>Mapping</h3>
-                                <p>A Python library to build interactive maps using Leaflet.js.</p>
+                                <h3>Interactive Maps</h3>
+                                <p>Folium is a Python library for building interactive leaflet.js maps directly in notebooks.</p>
                             </div>
                             <div class="feature-card">
-                                <i class="fas fa-paint-brush"></i>
+                                <i class="fas fa-search-location"></i>
                                 <h3>Choropleths</h3>
-                                <p>Visualize data patterns with colored geographic regions.</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-mouse-pointer"></i>
-                                <h3>Interactivity</h3>
-                                <p>Supports zoom, tooltips, and popups for rich user exploration.</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-layer-group"></i>
-                                <h3>Layer Control</h3>
-                                <p>Combine multiple map layers to compare datasets easily.</p>
+                                <p>Supports heatmaps and choropleth mapping to visualize demographic patterns.</p>
                             </div>
                         </div>
                     </div>
@@ -223,7 +193,7 @@
                 </div>
             </div>
 
-            <!-- Slide 2: Key Features -->
+            <!-- Slide: Key Features -->
             <div class="slide">
                 <div class="slide-content">
                     <h2 class="slide-title">Key Features</h2>
@@ -254,22 +224,6 @@
                 </div>
             </div>
 
-
-
-    
-    <div class="presentation-container">
-        <a href="https://liubovd.github.io/workshops/" class="workshop-link">
-            <i class="fas fa-chalkboard-teacher"></i> View Workshops
-        </a>
-
-        <div class="header">
-            <h1>Census Data Analysis Tool</h1>
-            <p>Using open-source tools for data fetching, processing, and visualization</p>
-        </div>
-
-        <div class="slides-container">
-            <!-- Slides above remain unchanged -->
-
             <!-- Slide: Open Source + Cloud with QR -->
             <div class="slide">
                 <div class="slide-content">
@@ -294,7 +248,7 @@
                 </div>
             </div>
 
-            <!-- New Final Slide: Summary / Takeaways -->
+            <!-- Slide: Summary / Takeaways -->
             <div class="slide">
                 <div class="slide-content">
                     <h2 class="slide-title">Summary & Takeaways</h2>
