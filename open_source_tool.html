@@ -54,148 +54,63 @@
         </div>
 
         <div class="slides-container">
+            <!-- Slides above remain unchanged -->
 
-            <!-- Slide 1: Introduction -->
+            <!-- Slide: Open Source + Cloud with QR -->
             <div class="slide">
                 <div class="slide-content">
-                    <h2 class="slide-title">Introduction to the Tool</h2>
-                    <div class="slide-body">
-                        <p>This presentation showcases a powerful data analysis tool built in Google Colab that:</p>
-                        <ul>
-                            <li>Fetches data directly from the US Census Bureau API</li>
-                            <li>Processes and transforms the data using Pandas</li>
-                            <li>Creates interactive visualizations with Folium</li>
-                            <li>Generates both tract-level and municipality-level insights</li>
-                        </ul>
-                        <div class="colab-badge">
-                            <i class="fab fa-google"></i> Google Colab Environment
+                    <h2 class="slide-title">Open Source + Cloud = Accessible GIS</h2>
+                    <div class="slide-body" style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 250px;">
+                            <p>Together, cloud computing and open-source tools democratize GIS:</p>
+                            <ul>
+                                <li>Reduces costs – no licenses or specialized hardware needed</li>
+                                <li>Supports interdisciplinary collaboration across research, policy, and business</li>
+                                <li>Encourages open science practices and reproducibility</li>
+                                <li>Accessible anywhere with internet connection</li>
+                                <li>Adaptable to diverse datasets and user needs</li>
+                            </ul>
+                            <p>Scan the QR code to access the workflow:</p>
                         </div>
-                        <p>The tool is designed for researchers, data analysts, and anyone interested in exploring demographic data.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 2: Google Colab -->
-            <div class="slide">
-                <div class="slide-content">
-                    <h2 class="slide-title">What is Google Colab?</h2>
-                    <div class="slide-body">
-                        <ul>
-                            <li>Free cloud-based Python environment</li>
-                            <li>Instant access to CPUs, GPUs, and TPUs</li>
-                            <li>No installation required — runs in your browser</li>
-                            <li>Supports data analysis, machine learning, and visualization workflows</li>
-                            <li>Integrates easily with Google Drive, GitHub, and external datasets</li>
-                            <li>Ideal for collaborative projects and reproducible workflows</li>
-                        </ul>
-                        <div style="text-align:center; margin-top:20px;">
-                            <svg width="400" height="120">
-                                <rect x="10" y="40" width="120" height="40" fill="#3498db" rx="8" ry="8"/>
-                                <text x="70" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">Your Python Code</text>
-                                <polygon points="130,60 160,50 160,70" fill="#2c3e50"/>
-                                <rect x="160" y="40" width="120" height="40" fill="#e67e22" rx="8" ry="8"/>
-                                <text x="220" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">API</text>
-                                <polygon points="280,60 310,50 310,70" fill="#2c3e50"/>
-                                <rect x="310" y="40" width="80" height="40" fill="#27ae60" rx="8" ry="8"/>
-                                <text x="350" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">Data Response</text>
-                            </svg>
+                        <div style="flex-shrink: 0; text-align: center;">
+                            <img src="QR.png" alt="QR Code to Workflow" style="width: 150px; height: 150px; border: 2px solid #3498db; border-radius: 8px;">
+                            <div style="margin-top: 8px; font-size: 0.9rem; color: #34495e;">Workflow: liubovd.github.io/workshops</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 3: APIs & Requests -->
+            <!-- New Final Slide: Summary / Takeaways -->
             <div class="slide">
                 <div class="slide-content">
-                    <h2 class="slide-title">APIs & Python Requests</h2>
+                    <h2 class="slide-title">Summary & Takeaways</h2>
                     <div class="slide-body">
-                        <ul>
-                            <li><strong>API (Application Programming Interface)</strong>: enables software to communicate and exchange data</li>
-                            <li>Provides a standard way to request and receive data from a service</li>
-                            <li>Example: US Census Bureau API provides demographic and geographic data</li>
-                            <li><strong>Python requests library</strong>:
-                                <ul>
-                                    <li>Sends HTTP requests to APIs</li>
-                                    <li>Retrieves data in formats like JSON</li>
-                                    <li>Enables automation and reproducibility in workflows</li>
-                                </ul>
-                            </li>
-                            <li>Integrates with Pandas/GeoPandas for further processing and analysis</li>
-                        </ul>
-                        <div style="text-align:center; margin-top:20px;">
-                            <svg width="400" height="140">
-                                <rect x="10" y="40" width="120" height="40" fill="#3498db" rx="8" ry="8"/>
-                                <text x="70" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">Python Code</text>
-                                <polygon points="130,60 160,50 160,70" fill="#2c3e50"/>
-                                <rect x="160" y="40" width="120" height="40" fill="#e67e22" rx="8" ry="8"/>
-                                <text x="220" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">Requests → API</text>
-                                <polygon points="280,60 310,50 310,70" fill="#2c3e50"/>
-                                <rect x="310" y="40" width="80" height="40" fill="#27ae60" rx="8" ry="8"/>
-                                <text x="350" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">JSON → Pandas</text>
-                            </svg>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-database"></i>
+                                <h3>Data Access</h3>
+                                <p>Seamlessly fetch U.S. Census data through APIs with open-source tools.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-cogs"></i>
+                                <h3>Processing Power</h3>
+                                <p>Pandas and GeoPandas provide flexible data wrangling and spatial analysis.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-map"></i>
+                                <h3>Visualization</h3>
+                                <p>Folium enables interactive maps for deeper exploration of demographics.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-cloud"></i>
+                                <h3>Accessibility</h3>
+                                <p>Google Colab ensures cloud-based, collaborative, and reproducible workflows.</p>
+                            </div>
                         </div>
+                        <p style="margin-top: 20px; font-weight: 600; text-align: center;">Together, these tools empower open, accessible, and impactful data analysis.</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Slide 4: Pandas & GeoPandas -->
-            <div class="slide">
-                <div class="slide-content">
-                    <h2 class="slide-title">Pandas & GeoPandas</h2>
-                    <div class="slide-body">
-                        <ul>
-                            <li><strong>Pandas</strong>: data manipulation and analysis of tabular data</li>
-                            <li>Filtering, grouping, merging, and aggregating datasets</li>
-                            <li><strong>GeoPandas</strong>: extends Pandas to handle geospatial data (shapefiles, GeoJSON, spatial dataframes)</li>
-                            <li>Supports spatial operations: intersections, joins, buffering, and plotting</li>
-                            <li>Enables efficient processing, analysis, and visualization of geospatial datasets</li>
-                        </ul>
-                        <div style="text-align:center; margin-top:20px;">
-                            <svg width="450" height="120">
-                                <rect x="10" y="40" width="120" height="40" fill="#3498db" rx="8" ry="8"/>
-                                <text x="70" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">CSV / GeoJSON</text>
-                                <polygon points="130,60 160,50 160,70" fill="#2c3e50"/>
-                                <rect x="160" y="40" width="140" height="40" fill="#e67e22" rx="8" ry="8"/>
-                                <text x="230" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">Pandas / GeoPandas</text>
-                                <polygon points="300,60 330,50 330,70" fill="#2c3e50"/>
-                                <rect x="330" y="40" width="100" height="40" fill="#27ae60" rx="8" ry="8"/>
-                                <text x="380" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">Map Visualization</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 5: Folium -->
-            <div class="slide">
-                <div class="slide-content">
-                    <h2 class="slide-title">What is Folium?</h2>
-                    <div class="slide-body">
-                        <ul>
-                            <li>Python library for creating interactive maps using Leaflet.js</li>
-                            <li>Visualize geospatial data in Jupyter Notebook or Colab</li>
-                            <li>Supports markers, popups, choropleths, and heatmaps</li>
-                            <li>Integrates with Pandas and GeoPandas for mapping dataframes</li>
-                            <li>Other similar open-source tools: Leaflet.js, Kepler.gl, Plotly, Matplotlib/Basemap</li>
-                        </ul>
-                        <div style="text-align:center; margin-top:20px;">
-                            <svg width="450" height="120">
-                                <rect x="10" y="40" width="120" height="40" fill="#3498db" rx="8" ry="8"/>
-                                <text x="70" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">CSV / GeoJSON</text>
-                                <polygon points="130,60 160,50 160,70" fill="#2c3e50"/>
-                                <rect x="160" y="40" width="140" height="40" fill="#e67e22" rx="8" ry="8"/>
-                                <text x="230" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">Pandas / GeoPandas</text>
-                                <polygon points="300,60 330,50 330,70" fill="#2c3e50"/>
-                                <rect x="330" y="40" width="100" height="40" fill="#27ae60" rx="8" ry="8"/>
-                                <text x="380" y="65" fill="white" font-size="12" text-anchor="middle" alignment-baseline="middle">Interactive Map (Folium)</text>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Original slides (Open Source, Key Features, QR) can stay here if needed -->
-
         </div>
 
         <div class="navigation">
