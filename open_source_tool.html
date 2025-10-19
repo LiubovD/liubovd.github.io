@@ -74,19 +74,107 @@
                 </div>
             </div>
 
-            <!-- Slide: Cloud with Colab -->
+            <!-- Slide: Slido Poll -->
             <div class="slide">
                 <div class="slide-content">
-                    <h2 class="slide-title">Running Workflows in the Cloud with Colab</h2>
+                    <h2 class="slide-title">Poll: Your Open-Source Tools</h2>
+                    <div class="slide-body" style="text-align: center;">
+                        <p>Which Open-Source tools do you use in your GIS or spatial data work?</p>
+                        <p style="margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: #3498db;">
+                            Go to <span style="font-family: monospace;">slido.com</span> on your phone and enter the event code:
+                        </p>
+                        <p style="font-size: 2rem; font-weight: bold; color: #e67e22;">1776759</p>
+                        <!-- QR Code Image -->
+                        <img src="https://raw.githubusercontent.com/LiubovD/liubovd.github.io/main/QR_slido.png" 
+                             alt="Slido QR Code" 
+                             style="margin-top: 20px; width: 200px; height: 200px;">        
+                        <p style="margin-top: 15px; font-size: 1rem; color: #34495e;">
+                            Or scan the QR code to participate in the poll"
+                        </p>
+                    </div>
+                </div>        
+            </div>
+
+            <!-- Slide: What is Google Colab -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">What is Google Colab?</h2>
                     <div class="slide-body">
-                        <p>Google Colab provides a fully cloud-based environment:</p>
-                        <ul>
-                            <li>No installation required – runs entirely in the browser</li>
-                            <li>Scales to any device: laptop, tablet, or even phone</li>
-                            <li>Enables collaboration and reproducibility with shareable notebooks</li>
-                            <li>Secure access to Census API and open datasets</li>
-                            <li>Computing resources (Python + Jupyter) instantly available</li>
-                        </ul>
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fab fa-google"></i>
+                                <h3>Cloud-Based</h3>
+                                <p>Colab is a free Jupyter Notebook environment hosted by Google in the cloud.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-cloud"></i>
+                                <h3>Accessible Anywhere</h3>
+                                <p>No installation required — runs directly in your browser on any device.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide: API & Requests -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">What is an API & Requests Library?</h2>
+                    <div class="slide-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-plug"></i>
+                                <h3>API</h3>
+                                <p>An Application Programming Interface allows programs to communicate with data services like the U.S. Census Bureau.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-network-wired"></i>
+                                <h3>Requests</h3>
+                                <p>The Python Requests library makes it easy to send queries and receive responses from APIs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide: Pandas & GeoPandas -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">What is Pandas & GeoPandas?</h2>
+                    <div class="slide-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-table"></i>
+                                <h3>Pandas</h3>
+                                <p>A Python library for data manipulation and analysis — powerful for tabular data like Census datasets.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-globe"></i>
+                                <h3>GeoPandas</h3>
+                                <p>Extends Pandas to support spatial data, enabling geographic operations like merging with shapefiles.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide: Folium -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="slide-title">What is Folium?</h2>
+                    <div class="slide-body">
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <h3>Interactive Maps</h3>
+                                <p>Folium is a Python library for building interactive leaflet.js maps directly in notebooks.</p>
+                            </div>
+                            <div class="feature-card">
+                                <i class="fas fa-search-location"></i>
+                                <h3>Choropleths</h3>
+                                <p>Supports heatmaps and choropleth mapping to visualize demographic patterns.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,38 +197,8 @@
                 </div>
             </div>
 
-            <!-- Slide 2: Key Features -->
-            <div class="slide">
-                <div class="slide-content">
-                    <h2 class="slide-title">Key Features</h2>
-                    <div class="slide-body">
-                        <div class="feature-grid">
-                            <div class="feature-card">
-                                <i class="fas fa-download"></i>
-                                <h3>Data Fetching</h3>
-                                <p>Retrieves data directly from the Census API with user-selected variables and years</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-table"></i>
-                                <h3>Data Processing</h3>
-                                <p>Uses Pandas to clean, merge, and calculate derived metrics like per-capita values</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-map-marked-alt"></i>
-                                <h3>Interactive Mapping</h3>
-                                <p>Creates choropleth maps with Folium for visual data exploration</p>
-                            </div>
-                            <div class="feature-card">
-                                <i class="fas fa-layer-group"></i>
-                                <h3>Multiple Geographic Levels</h3>
-                                <p>Analyzes data at both census tract and municipality levels</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide: Open Source + Cloud with QR -->
+            
+            <!-- Slide: QR Code (Now Last) -->
             <div class="slide">
                 <div class="slide-content">
                     <h2 class="slide-title">Open Source + Cloud = Accessible GIS</h2>
@@ -163,7 +221,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> <!-- closes slides-container -->
 
         <div class="navigation">
             <button class="btn" id="prev-btn"><i class="fas fa-arrow-left"></i> Previous</button>
