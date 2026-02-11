@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>RI Sledding Hills & Ice Rinks</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+  :root { --border:#e6e6e6; --muted:#555; --bg:#fff; --panel:#fafafa; }
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+  header{padding:10px 12px;border-bottom:1px solid var(--border);background:var(--bg);
+    display:flex;gap:10px;align-items:center;position:sticky;top:0;z-index:1000;}
+  header h1{font-size:16px;margin:0;font-weight:800;}
+  header .sub{font-size:13px;color:var(--muted);}
+  .btn{padding:8px 10px;border:1px solid #ccc;border-radius:10px;background:#fff;cursor:pointer;}
+  .chip{display:inline-flex;gap:8px;align-items:center;padding:6px 10px;border:1px solid #ddd;border-radius:999px;font-size:13px;background:#fff;}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block;}
+  .sled{background:#2e7d32;}
+  .ice{background:#1565c0;}
+  #layout{display:grid;grid-template-columns:1fr 360px;height:calc(100vh - 54px);}
+  #map{height:100%;}
+  aside{border-left:1px solid var(--border);background:var(--panel);overflow:auto;}
+  .panel{padding:12px;}
+  .panel h2{font-size:14px;margin:0 0 8px 0;}
+  .panel p{margin:0 0 10px 0;font-size:13px;color:var(--muted);line-height:1.35;}
+  .list{display:flex;flex-direction:column;gap:8px;}
+  .item{background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px;
+    display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;}
+  .name{font-weight:750;font-size:14px;margin:0;}
+  .meta{font-size:12px;color:var(--muted);margin:2px 0 0 0;}
+  .actions{display:flex;gap:6px;}
+  .small{font-size:12px;padding:6px 8px;border-radius:10px;}
+
+  /* Modal */
+  #backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:2000;}
+  #modal{width:min(520px, calc(100vw - 28px));background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+  #modal .mhead{padding:10px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+  #modal .mhead h3{margin:0;font-size:15px;}
+  #modal .mbody{padding:12px;display:grid;gap:10px;}
+  label{font-size:12px;color:var(--muted);display:grid;gap:6px;}
+  input,select{padding:10px;border:1px solid #ccc;border-radius:12px;font:inherit;outline:none;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .hint{font-size:12px;color:var(--muted);}
+  .mfoot{padding:0 12px 12px;display:flex;justify-content:flex-end;gap:8px;}
+
+  @media (max-width: 900px){
+    #layout{grid-template-columns:1fr;grid-template-rows:1fr 320px;}
+    aside{border-left:none;border-top:1px solid var(--border);}
+  }
+</style>
+</head>
+
+<body>
+<header>
+  <h1>RI Sledding Hills & Ice Rinks</h1>
+  <span class="sub">Community map • click to add a spot</span>
+  <span style="flex:1"></span>
+
+  <span class="chip" title="Legend">
+    <span class="dot sled"></span> Sledding
+    <span style="width:10px"></span>
+    <span class="dot ice"></span> Ice rink
+  </span>
+
+  <button class="btn" id="refreshBtn">Refresh</button>
+  <button class="btn" id="adminBtn" title="Only needed for delete">Admin mode</button>
+</header>
+
+<div id="layout">
+  <div id="map"></div>
+  <aside>
+    <div class="panel">
+      <h2>All spots</h2>
+      <p id="status" class="hint"></p>
+      <div class="list" id="spotList"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- Add spot modal -->
+<div id="backdrop" role="dialog" aria-modal="true" aria-label="Add a spot">
+  <div id="modal">
+    <div class="mhead">
+      <h3>Add a spot</h3>
+      <span style="flex:1"></span>
+      <button class="btn small" id="closeModal">Close</button>
+    </div>
+    <div class="mbody">
+      <div class="row">
+        <label>Type
+          <select id="typeInput">
+            <option value="sled">Sledding hill</option>
+            <option value="ice">Ice skating rink</option>
+          </select>
+        </label>
+        <label>Name
+          <input id="nameInput" placeholder="e.g., Roger Williams Park Hill" maxlength="80" />
+        </label>
+      </div>
+      <div class="hint" id="coordHint"></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn" id="cancelBtn">Cancel</button>
+      <button class="btn" id="saveBtn">Save</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // 1) PASTE your Apps Script Web App URL here:
+  const API_URL = "https://script.google.com/macros/s/AKfycbzaAR57oZtzIrDN6XZPRZz7P8L1yUXdn0ex8LD9k0xcxQ29uEgtVMGlc8lARPDAkVRs/exec";
+
+  // 2) Set your admin token (must match ADMIN_TOKEN in Code.gs).
+  // Keep it secret. This only affects who can delete.
+  let ADMIN_TOKEN = "";
+
+  const statusEl = document.getElementById("status");
+  const listEl = document.getElementById("spotList");
+
+  const map = L.map("map").setView([41.8240, -71.4128], 11);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
+
+  function colors(type){
+    return type === "ice"
+      ? { color:"#0d47a1", fillColor:"#1565c0" }
+      : { color:"#1b5e20", fillColor:"#2e7d32" };
+  }
+  function label(type){ return type === "ice" ? "Ice skating rink" : "Sledding hill"; }
+
+  const markerById = new Map();
+  let spots = [];
+
+  async function apiGet(url) {
+    const res = await fetch(url, { cache: "no-store" });
+    return await res.json();
+  }
+
+  async function apiPost(payload) {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    return await res.json();
+  }
+
+  async function loadSpots() {
+    statusEl.textContent = "Loading…";
+    const data = await apiGet(`${API_URL}?action=list`);
+    if (!data.ok) {
+      statusEl.textContent = "Error loading spots.";
+      return;
+    }
+    spots = data.spots || [];
+    renderAll();
+    statusEl.textContent = `Loaded ${spots.length} spot(s). Click the map to add.`;
+  }
+
+  function renderAll(){
+    // markers
+    markerById.forEach(m => m.remove());
+    markerById.clear();
+
+    for (const s of spots) {
+      if (typeof s.lat !== "number" || typeof s.lng !== "number") continue;
+      const m = L.circleMarker([s.lat, s.lng], { radius: 9, weight: 2, fillOpacity: 0.9, ...colors(s.type) })
+        .addTo(map)
+        .bindPopup(`<b>${escapeHtml(s.name || "(Unnamed)")}</b><br>${escapeHtml(label(s.type))}<br><span style="color:#555;font-size:12px">${s.lat.toFixed(5)}, ${s.lng.toFixed(5)}</span>`);
+      markerById.set(s.id, m);
+    }
+
+    // list
+    listEl.innerHTML = "";
+    for (const s of spots) {
+      const item = document.createElement("div");
+      item.className = "item";
+
+      const left = document.createElement("div");
+      const name = document.createElement("p");
+      name.className = "name";
+      name.textContent = s.name || "(Unnamed)";
+      const meta = document.createElement("p");
+      meta.className = "meta";
+      meta.textContent = `${label(s.type)} • ${Number(s.lat).toFixed(4)}, ${Number(s.lng).toFixed(4)}`;
+      left.appendChild(name);
+      left.appendChild(meta);
+
+      const actions = document.createElement("div");
+      actions.className = "actions";
+
+      const zoom = document.createElement("button");
+      zoom.className = "btn small";
+      zoom.textContent = "Zoom";
+      zoom.onclick = () => {
+        map.setView([s.lat, s.lng], 15);
+        markerById.get(s.id)?.openPopup();
+      };
+      actions.appendChild(zoom);
+
+      if (ADMIN_TOKEN) {
+        const del = document.createElement("button");
+        del.className = "btn small";
+        del.textContent = "Delete";
+        del.onclick = async () => {
+          const ok = confirm(`Delete "${s.name}"?`);
+          if (!ok) return;
+          const resp = await apiPost({ action: "delete", id: s.id, adminToken: ADMIN_TOKEN });
+          if (!resp.ok) alert(resp.error || "Delete failed");
+          await loadSpots();
+        };
+        actions.appendChild(del);
+      }
+
+      item.appendChild(left);
+      item.appendChild(actions);
+      listEl.appendChild(item);
+    }
+  }
+
+  // Modal add
+  const backdrop = document.getElementById("backdrop");
+  const nameInput = document.getElementById("nameInput");
+  const typeInput = document.getElementById("typeInput");
+  const coordHint = document.getElementById("coordHint");
+  let pending = null;
+
+  function openModal(latlng){
+    pending = latlng;
+    nameInput.value = "";
+    typeInput.value = "sled";
+    coordHint.textContent = `Location: ${latlng.lat.toFixed(5)}, ${latlng.lng.toFixed(5)}`;
+    backdrop.style.display = "flex";
+    setTimeout(() => nameInput.focus(), 0);
+  }
+  function closeModal(){ pending = null; backdrop.style.display = "none"; }
+  document.getElementById("closeModal").onclick = closeModal;
+  document.getElementById("cancelBtn").onclick = closeModal;
+  backdrop.addEventListener("click", (e) => { if (e.target === backdrop) closeModal(); });
+
+  document.getElementById("saveBtn").onclick = async () => {
+    if (!pending) return;
+    const name = nameInput.value.trim();
+    if (!name) { alert("Please enter a name."); nameInput.focus(); return; }
+    const type = (typeInput.value === "ice") ? "ice" : "sled";
+
+    const resp = await apiPost({ action: "add", name, type, lat: pending.lat, lng: pending.lng });
+    if (!resp.ok) alert(resp.error || "Add failed");
+    closeModal();
+    await loadSpots();
+  };
+
+  map.on("click", (e) => openModal(e.latlng));
+
+  document.getElementById("refreshBtn").onclick = loadSpots;
+
+  document.getElementById("adminBtn").onclick = () => {
+    if (ADMIN_TOKEN) {
+      ADMIN_TOKEN = "";
+      alert("Admin mode off (delete hidden).");
+      renderAll();
+      return;
+    }
+    const t = prompt("Enter admin token to enable delete:");
+    if (!t) return;
+    ADMIN_TOKEN = t;
+    alert("Admin mode on (delete enabled).");
+    renderAll();
+  };
+
+  function escapeHtml(str){
+    return String(str)
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#39;");
+  }
+
+  loadSpots();
+</script>
+</body>
+</html>
