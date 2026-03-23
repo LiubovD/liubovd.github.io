@@ -3,25 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title></title>
+  <title>RI Beach Experience Builder</title>
   <style>
     html, body {
       margin: 0;
       height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .header {
+      padding: 14px 20px;
+      background: #0f4c81;
+      color: white;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .frame-wrap {
+      height: calc(100vh - 56px);
     }
 
     iframe {
       width: 100%;
       height: 100%;
-      border: none;
+      border: 0;
     }
   </style>
 </head>
 <body>
-  <iframe
-    src="https://rihealth.maps.arcgis.com/home/item.html?id=aafbf78f6991453e9b22c60395aa3f55"
-    allowfullscreen
-    loading="lazy">
-  </iframe>
+  <div class="header">
+    <h1>RI Beach Experience Builder</h1>
+  </div>
+
+  <div class="frame-wrap">
+    <iframe
+      src="https://rihealth.maps.arcgis.com/home/item.html?id=aafbf78f6991453e9b22c60395aa3f55"
+      title="Beach Experience Builder App"
+      allowfullscreen
+      loading="lazy">
+    </iframe>
+  </div>
 </body>
 </html>
